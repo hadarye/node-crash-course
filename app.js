@@ -12,25 +12,26 @@ app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
     const blogs = [
-        {title: 'Yoshi finds eggs', snippet: 'eggs eggs eggs'},
-        {title: 'Mario finds stars', snippet: 'stars stars stars'},
-        {title: 'how to defeat bowser', snippet: 'bowser bowser bowser'},
+        { title: 'Yoshi finds eggs', snippet: 'eggs eggs eggs' },
+        { title: 'Mario finds stars', snippet: 'stars stars stars' },
+        { title: 'how to defeat bowser', snippet: 'bowser bowser bowser' },
     ];
     res.render('index', { title: "Home", blogs });
-});  
+});
 
 app.get('/about', (req, res) => {
-    res.sendFile('./views/about.html', { title: "About" });
+    res.render('about', { title: 'About' });
 });
 
 app.get('/blogs/create', (req, res) => {
-    res.sendFile('create', { title: "Create a new blog" });
-}); 
+    res.render('create', { title: 'Create a new blog' });
+});
 
 app.get('/about-us', (req, res) => {
     res.redirect('/about');
 })
- 
+
+// 404 page
 app.use((req, res) => {
-    res.status(404).sendFile('./views/404.html', { title: "404" });
-})
+    res.status(404).render('404', { title: '404' });
+});
